@@ -7,6 +7,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 api = Api(app)
 
+user_args = reqparse.RequestParser()
+user_args.add_argument("name", type=str, help="Name of the user can not be blank", required=True)
+user_args.add_argument("email", type=str, help="Email of the user can not be blank", required=True)
+
 class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
