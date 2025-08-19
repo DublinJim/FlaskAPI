@@ -20,6 +20,15 @@ class UserModel(db.Model):
         return f'<User {self.name}, {self.email}>'
 
 
+class UserResource(Resource):   
+    def get(self):
+        users = UserModel.query.all()
+        return users
+
+    # Register the UserResource with the API after its definition
+
+api.add_resource(UserResource, '/api/users/')
+
 @app.route('/')
 def home():
     return '<h1>Welcome to the API!</h1><p>This is a simple Flask API.</p>'
